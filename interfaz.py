@@ -95,37 +95,38 @@ ventana.title("Talleres artisticos")   #se pone titulo a la ventana
 
 ventana.geometry("900x700")  
 ventana.configure(bg="#a6cad6")  #Color de fondo de ventana pricnipal
+ventana.option_add("*Font", "Arimo 12")
 
 
-tk.Label(ventana, text="nombre:", bg="#a6cad6").grid(row=0, column=0, sticky="e") 
+tk.Label(ventana, text="nombre:", bg="#a6cad6").grid(row=0, column=0, sticky="e", pady=5) 
 entry_nombre = tk.Entry(ventana) 
-entry_nombre.grid(row=0, column=1)  
+entry_nombre.grid(row=0, column=1, pady=5)  
 
-tk.Label(ventana, text="edad:", bg="#a6cad6").grid(row=1, column=0, sticky="e") 
-entry_edad = tk.Entry(ventana)
-entry_edad.grid(row=1, column=1)  
+tk.Label(ventana, text="edad:", bg="#a6cad6").grid(row=1, column=0, sticky="e", pady=5) 
+entry_edad = tk.Entry(ventana , width=30)
+entry_edad.grid(row=1, column=1 , pady=5)  
 
-tk.Label(ventana, text="Taller/clase:", bg="#FDF6EC").grid(row=2, column=0, sticky="e") 
-combo_taller = ttk.Combobox(ventana, values=["Pintura", "Teatro", "Danza"], state="readonly")  
-combo_taller.grid(row=2, column=1)   
+tk.Label(ventana, text="Taller/clase:", bg="#a6cad6").grid(row=2, column=0, sticky="e", pady=5) 
+combo_taller = ttk.Combobox(ventana,width=30, values=["Pintura", "Teatro", "Danza"], state="readonly")  
+combo_taller.grid(row=2, column=1, pady=5)   
 
-tk.Label(ventana, text="cclases tomadas:", bg="#FDF6EC").grid(row=3, column=0, sticky="e")          
-entry_clases = tk.Entry(ventana) 
-entry_clases.grid(row=3, column=1)  
+tk.Label(ventana, text="clases tomadas:", bg="#a6cad6").grid(row=3, column=0, sticky="e", pady=5)          
+entry_clases = tk.Entry(ventana , width=30) 
+entry_clases.grid(row=3, column=1, pady=5)  
 
-tk.Button(ventana, text="Registrar", command=registrar_participante, bg="#a6cee3").grid(row=4, column=0, pady=10)
-tk.Button(ventana, text="ver estadisticas", command=mostrar_estadisticas, bg="#3c62db").grid(row=4, column=1)
-tk.Button(ventana, text="Ver grafico", command=mostrar_grafico, bg="#a6cee3").grid(row=4, column=2)
-tk.Button(ventana, text="Ver inscrito", command=mostrar_tabla_participantes, bg="#3c62db").grid(row=4, column=3, padx=20)
-tk.Button(ventana, text="Salir", command=salir, bg="#Ffffff").grid(row=6, column=0, columnspan=1, pady=18)
+tk.Button(ventana, text="Registrar", command=registrar_participante, bg="#7b9ebd", width=18).grid(row=4, column=0, padx=10, pady=10)
+tk.Button(ventana, text="ver estadisticas", command=mostrar_estadisticas, bg="#d6dfe8", width=18).grid(row=4, column=1, padx=10)
+tk.Button(ventana, text="Ver grafico", command=mostrar_grafico, bg="#7b9ebd" , width=18).grid(row=4, column=2,  padx=10 )
+tk.Button(ventana, text="Ver inscrito", command=mostrar_tabla_participantes, bg="#d6dfe8", width=18).grid(row=4, column=3, padx=5, pady=10)
+tk.Button(ventana, text="Salir", command=salir, bg="#Ffffff", width=18).grid(row=4, column=4, padx=10) 
  
 
 
-text_area = ScrolledText(ventana, width=40, height=15, bg="#dceaee" , pady=20)
+text_area = ScrolledText(ventana, width=40, height=15, bg="#dceaee" )
 text_area.grid(row=5, column=0, columnspan=2, padx=10, pady=10)
 
 
-image_label = tk.Label(ventana, bg="#cfe3e9")
+image_label = tk.Label(ventana, bg="#dceaee")
 image_label.grid(row=5, column=2) 
 
 ventana.mainloop()  

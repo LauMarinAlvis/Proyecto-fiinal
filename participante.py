@@ -105,7 +105,7 @@ def generar_grafico_talleres(df):  #funcion para grafica de barras con cantidad 
     conteo = df["Taller"].value_counts()  #conteo d cuantas personas hay por taller
 
         #https://encycolorpedia.es/0000ff colores azules
-    fig, ax = plt.subplots(figsize=(8, 5))  #con plt creando figura y ejes  
+    fig, ax = plt.subplots(figsize=(7, 5))  #con plt creando figura y ejes  
     colores = ['#9265ff', '#b38bff', '#cfb1ff']
     sns.barplot(x=conteo.index, y=conteo.values, hue=conteo.index, legend=False, palette=colores, ax=ax) #graficando de barras
     ax.set_title("Participantes por Taller", fontsize=14, fontweight='bold', color="#241178")  #se agrega el titulo de la grafica
