@@ -12,6 +12,9 @@ import pandas as pd
 import matplotlib.pyplot as plt  
 import os  
 import io  
+from matplotlib.backends.backend_agg import FigureCanvasAgg  
+from PIL import Image  
+import seaborn as sns
 
 
 
@@ -79,7 +82,37 @@ def obtener_estadisticas(df):
     taller_popular = df["Taller"].value_counts().idxmax()  # taller con mas inscritos
 
 
-    return (f"Participantes registrados: {cantidad}\n"
-        f"Edad promedio: {promedio_edad:.2f} años\n"
-        f"Taller mas popular: {taller_popular}")
+    return (f"Participantes registrados: {cantidad}\n" #muestra cuántas personas hay en total
+        f"Edad promedio: {promedio_edad:.2f} años\n"                  #muestra el promedio de edad, con 2 decimales
+        f"Taller mas popular: {taller_popular}")                  ##muestra cuál es el taller con más inscritos
+
+   
+   #https://www.youtube.com/watch?v=kRCtnaNN7Ew
+# pasa la grafica en imagen PIL para tkinter
+def figura_a_pil(fig):
+    buf = io.BytesIO()  # creando un buffer en memoria
+    canvas = FigureCanvasAgg(fig)  # creando una figura matplotlib 
+    canvas.draw()  #aqui esta la  grafica
+    canvas.print_png(buf)  #guarda la imagen en el buffer 
+    buf.seek(0)  # me duelve al inicio del buffer
+    return Image.open(buf)  # Abre la imagen como objeto PIL
+
+
+def generar_grafico_talleres(df):  #funcion para grafica de barras con cantidad de participantes por taller
+    if df.empty:  # Si no hay datos no hace nada
+        return None
+
+    conteo = df["Taller"].value_counts()  #conteo d cuantas personas hay por taller
+
+    fig, ax = plt.subplots(figsize=(6, 4))  #con plt creando figura y ejes     
+    sns.barplot(x=conteo.index, y=conteo.values, hue=conteo.index, legend=False, palette='pastel', ax=ax) #graficando de barras
+    ax.set_title("Participantes por Taller")  #se agrega el titulo de la grafica
+    ax.set_xlabel("Taller")  #etiqueta en X y Y
+    ax.set_ylabel("Cantidad")  
+    ax.grid(True)  #cuadricula o borde 
+
+     
+
+    return figura_a_pil(fig)  
+
 
