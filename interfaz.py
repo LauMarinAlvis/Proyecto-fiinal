@@ -60,10 +60,25 @@ def mostrar_tabla_participantes():
     for _, row in df.iterrows():   # recorremos cada fila del DataFrame
         tree.insert("", tk.END, values=list(row))   # insertamos los valores de esa fila en la tabla
 
-def mostrar_estadisticas():  #funion de resumen del archivo CSV     
+def mostrar_estadisticas():  #funion de resumen del archivo CSV 
+    df = cargar_datos()  #añade o carga los datos del archivo CSV 
+    resumen = obtener_estadisticas(df)  #aqui genero un resumen  
+    text_area.delete("1.0", tk.END)  #borra texto anterior 
+    text_area.insert(tk.END, resumen) #mutro un nuevo resumen
+    
 
+def mostrar_grafico():  # aqui el grafico de barras con cantidad por taller
+    df = cargar_datos()  
+    imagen_pil = generar_grafico_talleres(df)  #se usa pil pa crear grafico como imagen
 
+    if imagen_pil:
+        img_tk = ImageTk.PhotoImage(imagen_pil)  #convierte a imagen tkinter
+        image_label.configure(image=img_tk)  #pone imagen en etiqueta
+        image_label.image = img_tk  #guuarda referencia
+    else:
+        messagebox.showwarning("Sin datos", "No hay participantes registrados.")  #mensajee emerge
 
+ 
 
 ventana = tk.Tk()  # Crea la ventana
 ventana.title("Talleres artisticos")   #se pone titulo a la ventana
@@ -86,8 +101,13 @@ combo_taller.grid(row=2, column=1)
 
 tk.Label(ventana, text="cclases tomadas:", bg="#FDF6EC").grid(row=3, column=0, sticky="e")          
 entry_clases = tk.Entry(ventana) 
-
 entry_clases.grid(row=3, column=1)  
+
+tk.Button(ventana, text="Registrar", command=registrar_participante, bg="#90EE90").grid(row=4, column=0, pady=10)
+tk.Button(ventana, text="ver estadisticas", command=mostrar_estadisticas, bg="#ADD8E6").grid(row=4, column=1)
+tk.Button(ventana, text="Ver grafico", command=mostrar_grafico, bg="#FFB6C1").grid(row=4, column=2)
+tk.Button(ventana, text="Ver inscrito", command=mostrar_tabla_participantes, bg="#DDA0DD").grid(row=4, column=3, padx=20)
+
 
 
 ventana.mainloop()  
