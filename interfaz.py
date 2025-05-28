@@ -43,7 +43,7 @@ def mostrar_tabla_participantes():
 
     ventana_tabla = tk.Toplevel(ventana)  #creamos una nueva ventana que emerge dentro de la ventana principal
     ventana_tabla.title("Participantes registrados")  
-    ventana_tabla.geometry("700x500")  #tamaño de la ventana que nos va a mostrar
+    ventana_tabla.geometry("900x700")  #tamaño de la ventana que nos va a mostrar
 
     tree = ttk.Treeview(ventana_tabla)  #creo un widget tipo tabla Treeview para mostrar los datos
     tree.pack(expand=True, fill="both")  #aqui se ubica y si le da el ancho para que ocupe toda la ventana
@@ -78,20 +78,30 @@ def mostrar_grafico():  # aqui el grafico de barras con cantidad por taller
     else:
         messagebox.showwarning("Sin datos", "No hay participantes registrados.")  #mensajee emerge
 
- 
+        #https://www.youtube.com/watch?v=YHzKmWIEkg0
+
+def limpiar_campos():  #vaciamos los campos de la casilla
+    entry_nombre.delete(0, tk.END)  #borra todo el texto ingresado en la casilla
+    entry_edad.delete(0, tk.END)  #borra el contenido de la casilla 
+    combo_taller.set("")  #resetea talleres a vacio 
+    entry_clases.delete(0, tk.END)  #borra el contenido de la casilla clases tomadas 
+
+def salir():
+    ventana.destroy()  #cierra la ventana principal y termina el programa
+
 
 ventana = tk.Tk()  # Crea la ventana
 ventana.title("Talleres artisticos")   #se pone titulo a la ventana
 
-ventana.geometry("800x500")  
-ventana.configure(bg="#FDF6EC")  #Color de fondo de ventana pricnipal
+ventana.geometry("900x700")  
+ventana.configure(bg="#a6cad6")  #Color de fondo de ventana pricnipal
 
 
-tk.Label(ventana, text="nombre:", bg="#FDF6EC").grid(row=0, column=0, sticky="e") 
+tk.Label(ventana, text="nombre:", bg="#a6cad6").grid(row=0, column=0, sticky="e") 
 entry_nombre = tk.Entry(ventana) 
 entry_nombre.grid(row=0, column=1)  
 
-tk.Label(ventana, text="edad:", bg="#FDF6EC").grid(row=1, column=0, sticky="e") 
+tk.Label(ventana, text="edad:", bg="#a6cad6").grid(row=1, column=0, sticky="e") 
 entry_edad = tk.Entry(ventana)
 entry_edad.grid(row=1, column=1)  
 
@@ -103,12 +113,20 @@ tk.Label(ventana, text="cclases tomadas:", bg="#FDF6EC").grid(row=3, column=0, s
 entry_clases = tk.Entry(ventana) 
 entry_clases.grid(row=3, column=1)  
 
-tk.Button(ventana, text="Registrar", command=registrar_participante, bg="#90EE90").grid(row=4, column=0, pady=10)
-tk.Button(ventana, text="ver estadisticas", command=mostrar_estadisticas, bg="#ADD8E6").grid(row=4, column=1)
-tk.Button(ventana, text="Ver grafico", command=mostrar_grafico, bg="#FFB6C1").grid(row=4, column=2)
-tk.Button(ventana, text="Ver inscrito", command=mostrar_tabla_participantes, bg="#DDA0DD").grid(row=4, column=3, padx=20)
+tk.Button(ventana, text="Registrar", command=registrar_participante, bg="#a6cee3").grid(row=4, column=0, pady=10)
+tk.Button(ventana, text="ver estadisticas", command=mostrar_estadisticas, bg="#3c62db").grid(row=4, column=1)
+tk.Button(ventana, text="Ver grafico", command=mostrar_grafico, bg="#a6cee3").grid(row=4, column=2)
+tk.Button(ventana, text="Ver inscrito", command=mostrar_tabla_participantes, bg="#3c62db").grid(row=4, column=3, padx=20)
+tk.Button(ventana, text="Salir", command=salir, bg="#Ffffff").grid(row=6, column=0, columnspan=1, pady=18)
+ 
 
 
+text_area = ScrolledText(ventana, width=40, height=15, bg="#dceaee" , pady=20)
+text_area.grid(row=5, column=0, columnspan=2, padx=10, pady=10)
+
+
+image_label = tk.Label(ventana, bg="#cfe3e9")
+image_label.grid(row=5, column=2) 
 
 ventana.mainloop()  
 

@@ -84,7 +84,7 @@ def obtener_estadisticas(df):
 
     return (f"Participantes registrados: {cantidad}\n" #muestra cuántas personas hay en total
         f"Edad promedio: {promedio_edad:.2f} años\n"                  #muestra el promedio de edad, con 2 decimales
-        f"Taller mas popular: {taller_popular}")                  ##muestra cuál es el taller con más inscritos
+        f"Taller mas popular: {taller_popular}")                            ##muestra cuál es el taller con más inscritos
 
    
    #https://www.youtube.com/watch?v=kRCtnaNN7Ew
@@ -104,11 +104,13 @@ def generar_grafico_talleres(df):  #funcion para grafica de barras con cantidad 
 
     conteo = df["Taller"].value_counts()  #conteo d cuantas personas hay por taller
 
-    fig, ax = plt.subplots(figsize=(6, 4))  #con plt creando figura y ejes     
-    sns.barplot(x=conteo.index, y=conteo.values, hue=conteo.index, legend=False, palette='pastel', ax=ax) #graficando de barras
-    ax.set_title("Participantes por Taller")  #se agrega el titulo de la grafica
-    ax.set_xlabel("Taller")  #etiqueta en X y Y
-    ax.set_ylabel("Cantidad")  
+        #https://encycolorpedia.es/0000ff colores azules
+    fig, ax = plt.subplots(figsize=(8, 5))  #con plt creando figura y ejes  
+    colores = ['#9265ff', '#b38bff', '#cfb1ff']
+    sns.barplot(x=conteo.index, y=conteo.values, hue=conteo.index, legend=False, palette=colores, ax=ax) #graficando de barras
+    ax.set_title("Participantes por Taller", fontsize=14, fontweight='bold', color="#241178")  #se agrega el titulo de la grafica
+    ax.set_xlabel("Taller" , fontsize=12, color="#2510a3")  #etiqueta en X y Y
+    ax.set_ylabel("Cantidad" , fontsize=12, color="#1e0bd0")   
     ax.grid(True)  #cuadricula o borde 
 
      
